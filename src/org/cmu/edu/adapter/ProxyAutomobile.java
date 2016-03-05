@@ -14,6 +14,10 @@ import java.util.Set;
 
 import org.cmu.edu.db.CreateDB;
 import org.cmu.edu.db.CreateTable;
+import org.cmu.edu.db.ManageAutoTable;
+import org.cmu.edu.db.ManageMappingTable;
+import org.cmu.edu.db.ManageOptionSetTable;
+import org.cmu.edu.db.ManageOptionTable;
 import org.cmu.edu.model.Automobile;
 import org.cmu.edu.model.AutomobileCollection;
 import org.cmu.edu.model.OptionSet;
@@ -29,6 +33,14 @@ public abstract class ProxyAutomobile {
 	 * */
 	private static AutomobileCollection automobiles;
 	
+	private ManageAutoTable autoTable;
+	
+	private ManageMappingTable mappingTable;
+	
+	private ManageOptionSetTable optionSetTable;
+	
+	private ManageOptionTable optionTable;
+	
 	public ProxyAutomobile(){
 		ProxyAutomobile.automobiles = new AutomobileCollection();
 		
@@ -37,6 +49,14 @@ public abstract class ProxyAutomobile {
 		
 		/* create tables */
 		new CreateTable();
+		
+		this.autoTable = new ManageAutoTable();
+		
+		this.mappingTable = new ManageMappingTable();
+		
+		this.optionSetTable = new ManageOptionSetTable();
+		
+		this.optionTable = new ManageOptionTable();
 	}
 	
 	/*
@@ -46,6 +66,25 @@ public abstract class ProxyAutomobile {
 	 * */
 	public void addAutomobile(Automobile automobile){
 		ProxyAutomobile.automobiles.addAutomobile(automobile.getName(), automobile);
+		
+		/* add automobile to database */
+		this.autoTable.addAuto(automobile.getName(), automobile.getMake(), automobile.getBasePrice());
+		
+		int auto_id = this.autoTable.selectAuto(automobile.getName(), automobile.getMake(), automobile.getBasePrice());
+		
+		/* add optionSet and option to database */
+		Set<String> optionSets = automobile.getOptionSets();
+		for(String optionSet : optionSets){
+			this.optionSetTable.addOptionSet(optionSet);
+			int optionSet_id = this.optionSetTable.selectOptionSet(optionSet);
+			Set<String> options = automobile.getOptions(optionSet);
+			for(String option : options){
+				this.optionTable.addOption(option, automobile.getOptionValue(optionSet, option));
+				int option_id = this.optionTable.selectOption(option, automobile.getOptionValue(optionSet, option));
+				this.mappingTable.addMapping(auto_id, optionSet_id, option_id);
+			}
+		}
+		
 	}
 	
 	public void deleteAuto(String autoName){

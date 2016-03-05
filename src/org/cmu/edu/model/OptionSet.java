@@ -8,6 +8,7 @@ package org.cmu.edu.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -203,5 +204,31 @@ public class OptionSet implements Serializable{
 		this.selectedOption = optionName;
 	}
 	
+	/*
+	 * get all options in this optionSet
+	 * @return	the collection of all options
+	 * */
+	protected Set<String> getOptions(){
+		Set<String> res = new HashSet<String>();
+		for(Option option : this.options){
+			res.add(option.getName());
+		}
+		return res;
+	}
 	
+	/*
+	 * get the value of option
+	 * @param	optionName
+	 * 			the name of option
+	 * 
+	 * @return	the value of option
+	 * */
+	protected int getOptionValue(String optionName){
+		for(Option option : this.options){
+			if(option.getName().equals(optionName)){
+				return option.getValue();
+			}
+		}
+		return 0;
+	}
 }

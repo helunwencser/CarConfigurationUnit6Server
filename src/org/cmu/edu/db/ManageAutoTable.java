@@ -41,7 +41,7 @@ public class ManageAutoTable {
 	 * @return	if the record is contained in auto_table, return the primary key;
 	 * 			otherwise, return -1
 	 * */
-	private int selectAuto(String autoName, String make, int basePrice){
+	public int selectAuto(String autoName, String make, int basePrice){
 		int key = -1;
 		try {
 			String query = GetMySQL.getMySQL(SQL.SELECT_AUTO);

@@ -8,8 +8,10 @@ package org.cmu.edu.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Automobile implements Serializable{
 	/* serial version id */
@@ -245,5 +247,41 @@ public class Automobile implements Serializable{
 	public void addOptionSet(String optionSetName, Map<String, Integer> options){
 		OptionSet optionSet = new OptionSet(optionSetName, options);
 		this.optionSets.add(optionSet);
+	}
+	
+	/*
+	 * get the name of all optionSets
+	 * */
+	public Set<String> getOptionSets(){
+		Set<String> res = new HashSet<String>();
+		for(OptionSet optionSet : this.optionSets){
+			res.add(optionSet.getName());
+		}
+		return res;
+	}
+	
+	/*
+	 * get all options in optionSet
+	 * @param	optionSetName
+	 * 			the name of optionSet
+	 * 
+	 * @return	the collection of all options
+	 * */
+	public Set<String> getOptions(String optionSetName){
+		return this.getOptionSet(optionSetName).getOptions();
+	}
+	
+	/*
+	 * get the price of specific option
+	 * @param	optionSet
+	 * 			the name of optionSet
+	 * 
+	 * @param	option
+	 * 			the name of option
+	 * 
+	 * @return	the value of option
+	 * */
+	public int getOptionValue(String optionSet, String option){
+		return this.getOptionSet(optionSet).getOptionValue(option);
 	}
 }
