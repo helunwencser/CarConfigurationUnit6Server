@@ -114,7 +114,7 @@ public class ManageOptionTable {
 	 * @param	newPrice
 	 * 			new price
 	 * */
-	public void udpateOption(String option, int oldPrice, int newPrice){
+	public void updateOption(String option, int oldPrice, int newPrice){
 		try {
 			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.UPDATE_OPTION));
 			statement.setInt(1, newPrice);

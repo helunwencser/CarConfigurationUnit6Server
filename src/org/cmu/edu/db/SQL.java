@@ -30,6 +30,10 @@ public class SQL {
 	
 	public static String SELECT_AUTO = "select_auto";
 	
+	public static String SELECT_OPTION_ID = "select_option_id";
+	
+	public static String SELECT_OPTIONSET_ID = "select_optionSet_id";
+	
 	public static String DELETE_MAPPING = "delete_mapping";
 	
 	public static String DELETE_OPTION = "delete_option";

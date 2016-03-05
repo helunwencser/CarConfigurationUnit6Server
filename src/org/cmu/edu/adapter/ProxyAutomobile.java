@@ -84,11 +84,33 @@ public abstract class ProxyAutomobile {
 				this.mappingTable.addMapping(auto_id, optionSet_id, option_id);
 			}
 		}
-		
 	}
 	
 	public void deleteAuto(String autoName){
+		Automobile automobile = ProxyAutomobile.automobiles.getAutomobile(autoName);
 		ProxyAutomobile.automobiles.deleteAutomobile(autoName);
+		/* delete from auto_table */
+		int auto_id = this.autoTable.selectAuto(automobile.getName(), automobile.getMake(), automobile.getBasePrice());
+		this.autoTable.deleteOption(automobile.getName(), automobile.getMake(), automobile.getBasePrice());
+		
+		/* delete from mapping_table */
+		this.mappingTable.deleteMapping(auto_id);
+		
+		/* delete from optionSet_table and option_table */
+		Set<String> optionSets = automobile.getOptionSets();
+		for(String optionSet : optionSets){
+			int optionSet_id = this.optionSetTable.selectOptionSet(optionSet);
+			if(!this.mappingTable.isOptioinSetContained(optionSet_id)){
+				this.optionSetTable.deleteOptionSet(optionSet);
+			}
+			Set<String> options = automobile.getOptions(optionSet);
+			for(String option : options){
+				int option_id = this.optionTable.selectOption(option, automobile.getOptionValue(optionSet, option));
+				if(!this.mappingTable.isOptioinContained(option_id)){
+					this.optionTable.deleteOption(option, automobile.getOptionValue(optionSet, option));
+				}
+			}
+		}
 	}
 	
 	public HashSet<String> getModelNames(){
@@ -98,11 +120,15 @@ public abstract class ProxyAutomobile {
 	public void updateOptionSetName(String modelName, String optionSetName,
 			String newName) {
 		ProxyAutomobile.automobiles.getAutomobile(modelName).updateOptionSetName(optionSetName, newName);
+		this.optionSetTable.updateOptionSet(optionSetName, newName);
 	}
 
 	public void updateOptionPrice(String modelName, String optionSetName,
 			String optionName, int change) {
 		ProxyAutomobile.automobiles.getAutomobile(modelName).updateOptionPrice(optionSetName, optionName, change);
+		this.optionTable.updateOption(optionName,
+				ProxyAutomobile.automobiles.getAutomobile(modelName).getOptionValue(optionSetName, optionName),
+				ProxyAutomobile.automobiles.getAutomobile(modelName).getOptionValue(optionSetName, optionName) + change);
 	}
 
 	public void buildAuto(String fileName, String fileType) {
@@ -129,14 +155,18 @@ public abstract class ProxyAutomobile {
 		Automobile automobile = ProxyAutomobile.automobiles.getAutomobile(modelName);
 		ProxyAutomobile.automobiles.deleteAutomobile(modelName);
 		ProxyAutomobile.automobiles.addAutomobile(newName, automobile);
+		this.autoTable.updateAutoName(modelName, newName);
 	}
 
 	public void updateBasePrice(String modelName, int change) {
 		ProxyAutomobile.automobiles.getAutomobile(modelName).setBasePrice(change);
+		int baseprice = ProxyAutomobile.automobiles.getAutomobile(modelName).getBasePrice() + change;
+		this.autoTable.updateAutoBasePrice(modelName, baseprice);
 	}
 
 	public void updateMake(String modelName, String make) {
 		ProxyAutomobile.automobiles.getAutomobile(modelName).setMake(make);
+		this.autoTable.updateAutoMake(modelName, make);
 	}
 
 	public void deleteOptionSet(String modelName, String optionSetName) {

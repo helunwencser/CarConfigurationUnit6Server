@@ -63,6 +63,52 @@ public class ManageMappingTable {
 	}
 	
 	/*
+	 * if option_id is contained in mapping_table
+	 * @param	option_id
+	 * 			the primary key of option
+	 * 
+	 * @return	if the option_id is contained in mapping_table, return true;
+	 * 			otherwise, return false
+	 * */
+	public boolean isOptioinContained(int option_id){
+		ResultSet resultSet = null;
+		try {
+			String query = GetMySQL.getMySQL(SQL.SELECT_OPTION_ID);
+			PreparedStatement statement = this.conn.prepareStatement(query);
+			statement.setInt(1, option_id);
+			resultSet = statement.executeQuery(query);
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultSet == null ? false : true;
+	}
+	
+	/*
+	 * if optionSet_id is contained in mapping_table
+	 * @param	optionSet_id
+	 * 			the primary key of option
+	 * 
+	 * @return	if the optionSet_id is contained in mapping_table, return true;
+	 * 			otherwise, return false
+	 * */
+	public boolean isOptioinSetContained(int optionSet_id){
+		ResultSet resultSet = null;
+		try {
+			String query = GetMySQL.getMySQL(SQL.SELECT_OPTIONSET_ID);
+			PreparedStatement statement = this.conn.prepareStatement(query);
+			statement.setInt(1, optionSet_id);
+			resultSet = statement.executeQuery(query);
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultSet == null ? false : true;
+	}
+	
+	/*
 	 * add a mapping record into mapping_table, return it's key
 	 * @param	auto_id
 	 * 			the primary key of auto

@@ -49,6 +49,12 @@ select * from option_table where option = ? and price = ?
 select_optionSet
 select * from optionSet_table where optionSet = ?
 
+select_option_id
+select * from mapping_table where option_id = ?
+
+select_option_id
+select * from mapping_table where optionSet_id = ?
+
 update_auto_baseprice
 update auto_table set baseprice = ? where name = ?
 

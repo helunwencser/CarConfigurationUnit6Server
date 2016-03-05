@@ -164,7 +164,7 @@ public class ManageAutoTable {
 	 * 			the new basePrice
 	 * 
 	 * */
-	public void udpateAutoBasePrice(String autoName, int basePrice){
+	public void updateAutoBasePrice(String autoName, int basePrice){
 		try {
 			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.UPDATE_AUTO_BASEPRICE));
 			statement.setInt(1, basePrice);
