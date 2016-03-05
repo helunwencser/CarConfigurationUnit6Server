@@ -150,7 +150,50 @@ public class ManageMappingTable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/*
+	 * update option_id in mapping_table
+	 * @param	auto_id
+	 * 			auto id
+	 * 
+	 * @param	optionSet_id
+	 * 			optionSet id
+	 * 
+	 * @param	oldOption_id
+	 * 			oldOption id
+	 * 
+	 * @param	newOption_id
+	 * 			newOption id
+	 * */
+	public void updateOptionID(int auto_id, int optionSet_id, int oldOption_id, int newOption_id){
+		try {
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.UPDATE_MAPPING_OPTION_ID));
+			statement.setInt(1, newOption_id);
+			statement.setInt(2, auto_id);
+			statement.setInt(3, optionSet_id);
+			statement.setInt(4, oldOption_id);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+	}
+	
+	public void updateOptionSetID(int auto_id, int oleOptionSet_id, int newOptionSet_id){
+		try {
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.UPDATE_MAPPING_OPTIONSET_ID));
+			statement.setInt(1, newOptionSet_id);
+			statement.setInt(2, auto_id);
+			statement.setInt(3, oleOptionSet_id);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/*

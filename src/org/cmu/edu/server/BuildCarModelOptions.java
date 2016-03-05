@@ -6,7 +6,6 @@ import java.net.Socket;
 import java.util.Properties;
 
 import org.cmu.edu.adapter.BuildAuto;
-import org.cmu.edu.db.CreateDB;
 import org.cmu.edu.socket.DefaultSocketClient;
 /*
  * Author: Lunwen He

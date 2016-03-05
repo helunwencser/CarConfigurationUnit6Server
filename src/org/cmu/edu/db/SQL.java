@@ -51,4 +51,8 @@ public class SQL {
 	public static String UPDATE_AUTO_MAKE = "update_auto_make";
 	
 	public static String UPDATE_AUTO_BASEPRICE = "update_auto_baseprice";
+	
+	public static String UPDATE_MAPPING_OPTION_ID = "update_mappint_option_id";
+	
+	public static String UPDATE_MAPPING_OPTIONSET_ID = "update_mapping_optionset_id";
 }

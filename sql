@@ -69,3 +69,9 @@ update option_table set price = ? where option = ? and price = ?
 
 update_optionSet
 update optionSet_table set optionSet = ? where optionSet = ?
+
+update_mapping_option_id
+update mapping_table set option_id = ? where auto_id = ?and optionSet_id = ? and option_id = ?
+
+update_mapping_optionSet_id
+upate mapping_table set optionSet_id = ? where auto_id ? and optionSet_id = ?

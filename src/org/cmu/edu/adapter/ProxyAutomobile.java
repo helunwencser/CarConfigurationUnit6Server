@@ -120,15 +120,35 @@ public abstract class ProxyAutomobile {
 	public void updateOptionSetName(String modelName, String optionSetName,
 			String newName) {
 		ProxyAutomobile.automobiles.getAutomobile(modelName).updateOptionSetName(optionSetName, newName);
-		this.optionSetTable.updateOptionSet(optionSetName, newName);
+		Automobile automobile = ProxyAutomobile.automobiles.getAutomobile(modelName);
+		this.optionSetTable.addOptionSet(newName);
+		int newOptionID = this.optionSetTable.selectOptionSet(newName);
+		int oldOptionID = this.optionSetTable.selectOptionSet(optionSetName);
+		this.mappingTable.updateOptionSetID(
+				this.autoTable.selectAuto(modelName, automobile.getMake(), automobile.getBasePrice()), 
+				this.optionSetTable.selectOptionSet(optionSetName), 
+				newOptionID);
+		if(!this.mappingTable.isOptioinSetContained(oldOptionID)){
+			this.optionSetTable.deleteOptionSet(optionSetName);
+		}
 	}
 
 	public void updateOptionPrice(String modelName, String optionSetName,
 			String optionName, int change) {
 		ProxyAutomobile.automobiles.getAutomobile(modelName).updateOptionPrice(optionSetName, optionName, change);
-		this.optionTable.updateOption(optionName,
-				ProxyAutomobile.automobiles.getAutomobile(modelName).getOptionValue(optionSetName, optionName),
-				ProxyAutomobile.automobiles.getAutomobile(modelName).getOptionValue(optionSetName, optionName) + change);
+		int oldPrice = ProxyAutomobile.automobiles.getAutomobile(modelName).getOptionValue(optionSetName, optionName);
+		int newPrice = ProxyAutomobile.automobiles.getAutomobile(modelName).getOptionValue(optionSetName, optionName) + change; 
+		this.optionTable.addOption(optionName, newPrice);
+		int newOption_id = this.optionTable.selectOption(optionName, newPrice);
+		Automobile automobile = ProxyAutomobile.automobiles.getAutomobile(modelName);
+		this.mappingTable.updateOptionID(
+				this.autoTable.selectAuto(modelName, automobile.getMake(), automobile.getBasePrice()), 
+				this.optionSetTable.selectOptionSet(optionSetName), 
+				this.optionTable.selectOption(optionName, oldPrice), 
+				newOption_id);
+		if(!this.mappingTable.isOptioinContained(this.optionTable.selectOption(optionName, oldPrice))){
+			this.optionTable.deleteOption(optionName, oldPrice);
+		}
 	}
 
 	public void buildAuto(String fileName, String fileType) {
