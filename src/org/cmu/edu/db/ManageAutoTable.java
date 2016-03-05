@@ -122,7 +122,69 @@ public class ManageAutoTable {
 		}
 	}
 	
+	/*
+	 * update automobile name
+	 * @param	oldAutoName
+	 * 			the origional automobile name
+	 * 
+	 * @param	newAutoName
+	 * 			the new automobile name
+	 * */
+	public void updateAutoName(String oldAutoName, String newAutoName){
+		try {
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.UPDATE_AUTO_NAME));
+			statement.setString(1, newAutoName);
+			statement.setString(2, oldAutoName);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
+	/*
+	 * update the make of automobile
+	 * @param	autoName
+	 * 			the name of automobile
+	 * 
+	 * @param	make
+	 * 			the new make name
+	 * */
+	public void updateAutoMake(String autoName, String make){
+		try{
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.UPDATE_AUTO_MAKE));
+			statement.setString(1, make);
+			statement.setString(2, autoName);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*
+	 * update the baseprice of automobile
+	 * @param	autoName
+	 * 			the name of automobile
+	 * 
+	 * @param	basePrice
+	 * 			the new basePrice
+	 * 
+	 * */
+	public void udpateAutoBasePrice(String autoName, int basePrice){
+		try {
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.UPDATE_AUTO_BASEPRICE));
+			statement.setInt(1, basePrice);
+			statement.setString(2, autoName);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	/*
 	 * close resources

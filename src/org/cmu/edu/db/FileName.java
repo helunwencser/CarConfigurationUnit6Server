@@ -41,4 +41,10 @@ public class FileName {
 	public static String UPDATE_OPTION = "./update_record/update_option";
 	
 	public static String UPDATE_OPTIONSET = "./update_record/update_optionSet";
+	
+	public static String UPDATE_AUTO_NAME = "./update_record/udpate_auto_name";
+	
+	public static String UPDATE_AUTO_MAKE = "./update_record/update_auto_make";
+	
+	public static String UPDATE_AUTO_BASEPRICE = "./update_record/update_auto_baseprice";
 }

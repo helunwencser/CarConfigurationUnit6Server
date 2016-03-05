@@ -1,0 +1,1 @@
+update auto_table set name = ? where name = ?
