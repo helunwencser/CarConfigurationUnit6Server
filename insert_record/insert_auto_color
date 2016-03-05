@@ -1,1 +1,0 @@
-insert into auto_color_table (auto, color) values (?, ?)

@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.Properties;
 
 import org.cmu.edu.adapter.BuildAuto;
+import org.cmu.edu.db.CreateDB;
 import org.cmu.edu.socket.DefaultSocketClient;
 /*
  * Author: Lunwen He
@@ -26,6 +27,9 @@ public class BuildCarModelOptions implements AutoServer{
 	
 	public BuildCarModelOptions(){
 		this.buildAuto = new BuildAuto();
+		
+		/* create database */
+		new CreateDB();
 		try {
 			/* listen on port 8888 */
 			this.serverSocket = new ServerSocket(8888);

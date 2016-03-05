@@ -1,1 +1,0 @@
-insert into airbag_price_table (airbag, price) values (?, ?)

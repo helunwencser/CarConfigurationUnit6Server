@@ -4,4 +4,4 @@ create table if not exists auto_table (
     make char(128),
     baseprice int,
     primary key(id)
-    );
+);

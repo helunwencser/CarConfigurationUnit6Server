@@ -1,1 +1,0 @@
-insert into transmission_price_table (transmission, price) values (?, ?)

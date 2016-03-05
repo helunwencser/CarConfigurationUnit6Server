@@ -1,1 +1,0 @@
-insert into auto_brake_table (auto, brake) values (?, ?)

@@ -1,1 +1,0 @@
-insert into auto_airbag_table (auto, airbag) values (?, ?)

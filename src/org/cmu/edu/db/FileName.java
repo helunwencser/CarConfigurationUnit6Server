@@ -8,45 +8,29 @@ public class FileName {
 	
 	public static String CREATE_AUTO_TABLE = "./create_table/create_auto_table";
 	
-	public static String CREATE_COLOR_PRICE_TABLE = "./create_table/create_color_price_table";
+	public static String CREATE_OPTIONSET_TABLE = "./create_table/create_optionSet_table";
 	
-	public static String CREATE_AUTO_COLOR_TABLE = "./create_table/create_auto_color_table";	
+	public static String CREATE_OPTION_TABLE = "./create_table/create_option_table";
 	
-	public static String CREATE_TRANSMISSION_PRICE_TABLE = "./create_table/create_transmission_price_table";
+	public static String CREATE_MAPPING_TABLE = "./create_table/create_mapping_table";
 	
-	public static String CREATE_AUTO_TRANSMISSION_TABLE = "./create_table/create_auto_transmission_table";
+	public static String INSERT_AUTO = "./insert_record/insert_auto";
 	
-	public static String CREATE_BRAKE_TABLE = "./create_table/create_brake_price_table";
+	public static String INSERT_OPTIONSET = "./insert_record/insert_optionSet";
 	
-	public static String CREATE_AUTO_BTAKE_TABLE = "./create_table/create_auto_brake_table";
+	public static String INSERT_OPTION = "./insert_record/insert_option";
 	
-	public static String CREATE_AIRBAG_PRICE_TABLE = "./create_table/create_airbag_price_table";
+	public static String INSERT_MAPPING = "./insert_record/insert_mapping";
 	
-	public static String CREATE_AUTO_AIRBAG_TABLE = "./create_table/create_auto_airbag_table";
+	public static String SELECT_MAPPING = "./select_record/select_mapping";
 	
-	public static String CREATE_POWERMOONROOF_TABLE = "./create_table/create_powerMoonroof_price_table";
+	public static String SELECT_OPTION = "./select_record/select_option";
 	
-	public static String CREATE_AUTO_POWERMOONROOF_TABLE = "./create_table/create_auto_powerMoonroof_table";
+	public static String SELECT_OPTIONSET = "./select_record/select_optionSet";
 	
-	public static String INSERT_INTO_AUTO_TABLE = "./insert_record/insert_auto";
+	public static String DELETE_MAPPING = "./delete_record/delete_mapping";
 	
-	public static String INSERT_INTO_COLOR_PRICE_TABLE = "./insert_record/insert_color_price";
+	public static String DELETE_OPTION = "./delete_record/delete_option";
 	
-	public static String INSERT_INTO_AUTO_COLOR_TABLE = "./insert_record/insert_auto_color";
-	
-	public static String INSERT_INTO_TRANSMISSION_PRICE_TABLE = "./insert_record/insert_transmission_price";
-	
-	public static String INSERT_INTO_AUTO_TRANSMISSION_TABLE = "./insert_record/insert_auto_transmission";
-	
-	public static String INSERT_INTO_BRAKE_PRICE_TABLE = "./insert_record/insert_brake_price";
-	
-	public static String INSERT_INTO_AUTO_BRAKE_TABLE = "./insert_record/insert_auto_brake";
-	
-	public static String INSERT_INTO_AIRBAG_PRICE_TABLE = "./insert_record/insert_airbag_price";
-	
-	public static String INSERT_INTO_AUTO_AIRBAGE_TABLE = "./insert_record/insert_auto_airbag";
-	
-	public static String INSERT_INTO_POWERMOONROOF_TABLE = "./insert_record/insert_powerMoonroof_price";
-	
-	public static String INSERT_INTO_AUTO_POWERMOONROOF_TABLE = "./insert_record/insert_auto_powerMoonroof";
+	public static String UPDATE_OPTION = "./update_record/update_option";
 }

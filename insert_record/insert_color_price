@@ -1,1 +1,0 @@
-insert into color_price_table (color, price) values (?, ?)
