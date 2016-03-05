@@ -6,8 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ManageOptionSetTable {
-
+public class ManageAutoTable {
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	private static final String DB_URL = "jdbc:mysql://localhost/" + Config.DATABASE;
 	
@@ -16,7 +15,7 @@ public class ManageOptionSetTable {
 	
 	private Connection conn = null;
 	
-	public ManageOptionSetTable(){
+	public ManageAutoTable(){
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -30,21 +29,28 @@ public class ManageOptionSetTable {
 	}
 	
 	/*
-	 * if <optionSet> is contained in optionSet_table
-	 * @param	optionSet
-	 * 			the name of optionSet
-	 *
-	 * @return	if record is contained in option_table, return the ResultSet;
+	 * if record <autoName, make, basePrice> is contained is auto_table
+	 * @param	autoName
+	 * 			the name of automobile
+	 * 
+	 * @param	make
+	 * 			the name of make
+	 * 
+	 * @param	basePrice
+	 * 			the basePrice of automobile
+	 * 
+	 * @return	if the record is contained in auto_table, return the ResultSet;
 	 * 			otherwise, return null
 	 * */
-	private ResultSet selectOptionSet(String optionSet){
-		String query = GetMySQL.getMySQL(FileName.SELECT_OPTIONSET);
+	private ResultSet selectAuto(String autoName, String make, int basePrice){
 		ResultSet resultSet = null;
 		try {
+			String query = GetMySQL.getMySQL(FileName.SELECT_AUTO);
 			PreparedStatement statement = this.conn.prepareStatement(query);
-			statement.setString(1, optionSet);
+			statement.setString(1, autoName);
+			statement.setString(2, make);
+			statement.setInt(3, basePrice);
 			resultSet = statement.executeQuery(query);
-			statement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,21 +59,30 @@ public class ManageOptionSetTable {
 	}
 	
 	/*
-	 * add optionSet into optionSet_table
-	 * @param	optionSet
-	 * 			option set
+	 * add record <autoName, make, basePrice> into auto_table
+	 * @param	autoName
+	 * 			the name of automobile
 	 * 
-	 * @return	the primary key of the record
+	 * @param	make
+	 * 			the name of make
+	 * 
+	 * @param	basePrice
+	 * 			the basePrice of automobile
+	 * 
+	 * @return	the primary key of inserted record
 	 * */
-	public int addOptionSet(String optionSet){
+	public int addAuto(String autoName, String make, int basePrice){
 		int key = -1;
-		ResultSet resultSet = this.selectOptionSet(optionSet);
-		if(resultSet != null){
+		ResultSet resultSet = this.selectAuto(autoName, make, basePrice);
+		if(resultSet == null){
 			try {
-				PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.INSERT_OPTIONSET));
-				statement.setString(1, optionSet);
+				PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.INSERT_AUTO));
+				statement.setString(1, autoName);
+				statement.setString(2, make);
+				statement.setInt(3, basePrice);
 				statement.execute();
 				statement.close();
+				resultSet = this.selectAuto(autoName, make, basePrice);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -83,14 +98,22 @@ public class ManageOptionSetTable {
 	}
 	
 	/*
-	 * delete optionSet from optionSet_table
-	 * @param	optionSet
-	 * 			optionSet to be deleted
+	 * delete record from auto_table
+	 * @param	autoName
+	 * 			the name of automobile
+	 * 
+	 * @param	make
+	 * 			the name of make
+	 * 
+	 * @param	basePrice
+	 * 			the basePrice of automobile
 	 * */
-	public void deleteOptionSet(String optionSet){
+	public void deleteOption(String autoName, String make, int basePrice){
 		try {
-			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.DELETE_OPTIONSET));
-			statement.setString(1, optionSet);
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.DELETE_AUTO));
+			statement.setString(1, autoName);
+			statement.setString(2, make);
+			statement.setInt(3, basePrice);
 			statement.execute();
 			statement.close();
 		} catch (SQLException e) {
@@ -99,27 +122,7 @@ public class ManageOptionSetTable {
 		}
 	}
 	
-	/*
-	 * update optionSet
-	 * @param	oldOptionSet
-	 * 			the origional option set
-	 * 
-	 * @param	newOptionSet
-	 * 			the new optionSet
-	 * */
-	public void updateOptionSet(String oldOptionSet, String newOptionSet){
-		try {
-			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.UPDATE_OPTIONSET));
-			statement.setString(1, newOptionSet);
-			statement.setString(2, newOptionSet);
-			statement.execute();
-			statement.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+	
 	
 	/*
 	 * close resources
@@ -133,4 +136,5 @@ public class ManageOptionSetTable {
 			e.printStackTrace();
 		}
 	}
+	
 }

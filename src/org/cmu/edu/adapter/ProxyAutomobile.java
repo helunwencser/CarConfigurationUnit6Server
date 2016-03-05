@@ -40,6 +40,10 @@ public abstract class ProxyAutomobile {
 		ProxyAutomobile.automobiles.addAutomobile(automobile.getName(), automobile);
 	}
 	
+	public void deleteAuto(String autoName){
+		ProxyAutomobile.automobiles.deleteAutomobile(autoName);
+	}
+	
 	public HashSet<String> getModelNames(){
 		return ProxyAutomobile.automobiles.getModelNames();
 	}

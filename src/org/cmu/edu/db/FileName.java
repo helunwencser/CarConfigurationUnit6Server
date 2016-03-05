@@ -28,9 +28,17 @@ public class FileName {
 	
 	public static String SELECT_OPTIONSET = "./select_record/select_optionSet";
 	
+	public static String SELECT_AUTO = "./select_record/select_auto";
+	
 	public static String DELETE_MAPPING = "./delete_record/delete_mapping";
 	
 	public static String DELETE_OPTION = "./delete_record/delete_option";
 	
+	public static String DELETE_OPTIONSET = "./delete_record/delete_optionSet";
+	
+	public static String DELETE_AUTO = "./delete_record/delete_auto";
+	
 	public static String UPDATE_OPTION = "./update_record/update_option";
+	
+	public static String UPDATE_OPTIONSET = "./update_record/update_optionSet";
 }

@@ -20,6 +20,13 @@ public interface CreateAuto {
 	public void buildAuto(String fileName, String fileType);
 	
 	/*
+	 * delete automobile
+	 * @param	autoName
+	 * 			the name of automobile
+	 * */
+	public void deleteAuto(String autoName);
+	
+	/*
 	 * This function searches and prints the 
 	 * properties of a given Automobile.
 	 * */

@@ -1,0 +1,1 @@
+delete from auto_table where name = ? and make = ? and baseprice = ?

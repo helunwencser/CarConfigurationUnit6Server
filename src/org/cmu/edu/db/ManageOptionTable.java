@@ -135,4 +135,17 @@ public class ManageOptionTable {
 			e.printStackTrace();
 		}
 	}
+	
+	/*
+	 * close resources
+	 * */
+	public void closeResources(){
+		try {
+			this.conn.close();
+			System.out.println("Resources closed.");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
