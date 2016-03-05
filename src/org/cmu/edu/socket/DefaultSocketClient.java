@@ -7,10 +7,8 @@ package org.cmu.edu.socket;
 import java.net.*;
 import java.util.HashSet;
 import java.util.Properties;
-import java.util.Set;
 import java.io.*;
 
-import org.cmu.edu.adapter.BuildAuto;
 import org.cmu.edu.model.Automobile;
 import org.cmu.edu.server.BuildCarModelOptions;
 public class DefaultSocketClient 

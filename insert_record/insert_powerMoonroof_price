@@ -1,0 +1,1 @@
+insert into powerMoonroof_price_table (powerMoonroof, price) values (?, ?)

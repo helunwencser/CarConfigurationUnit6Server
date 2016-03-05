@@ -2,8 +2,6 @@ package org.cmu.edu.server;
 
 import java.util.Properties;
 
-import org.cmu.edu.model.Automobile;
-
 
 /*
  * Author: Lunwen He
