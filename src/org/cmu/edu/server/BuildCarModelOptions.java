@@ -28,8 +28,6 @@ public class BuildCarModelOptions implements AutoServer{
 	public BuildCarModelOptions(){
 		this.buildAuto = new BuildAuto();
 		
-		/* create database */
-		new CreateDB();
 		try {
 			/* listen on port 8888 */
 			this.serverSocket = new ServerSocket(8888);

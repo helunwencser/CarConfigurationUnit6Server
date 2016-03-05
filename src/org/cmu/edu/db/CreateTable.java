@@ -20,13 +20,13 @@ public class CreateTable {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			
-			this.createTable(GetMySQL.getMySQL(FileName.CREATE_AUTO_TABLE));
+			this.createTable(GetMySQL.getMySQL(SQL.CREATE_AUTO_TABLE));
 			
-			this.createTable(GetMySQL.getMySQL(FileName.CREATE_OPTIONSET_TABLE));
+			this.createTable(GetMySQL.getMySQL(SQL.CREATE_OPTIONSET_TABLE));
 			
-			this.createTable(GetMySQL.getMySQL(FileName.CREATE_OPTION_TABLE));
+			this.createTable(GetMySQL.getMySQL(SQL.CREATE_OPTION_TABLE));
 			
-			this.createTable(GetMySQL.getMySQL(FileName.CREATE_MAPPING_TABLE));
+			this.createTable(GetMySQL.getMySQL(SQL.CREATE_MAPPING_TABLE));
 			
 			this.closeResources();
 		} catch (ClassNotFoundException e) {

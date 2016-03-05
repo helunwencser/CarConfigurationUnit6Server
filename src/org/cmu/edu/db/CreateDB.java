@@ -21,7 +21,7 @@ public class CreateDB {
 	        
 	    	Statement statement = connection.createStatement();
 	        
-	    	statement.executeUpdate(GetMySQL.getMySQL(FileName.CREATEDB));
+	    	statement.executeUpdate(GetMySQL.getMySQL(SQL.CREATEDB));
 	    	
 	    	System.out.println("Create database successfully!");
 	    	
@@ -36,9 +36,5 @@ public class CreateDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}    	
-    }
-    
-    public static void main(String[] args){
-    	new CreateDB();
     }
 }

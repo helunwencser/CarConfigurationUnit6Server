@@ -7,20 +7,21 @@ import java.io.IOException;
 
 public class GetMySQL {
 	/*
-	 * get the MySQL in the file specified in filepath
-	 * @param	filepath
-	 * 			the path of the file
+	 * get the MySQL in the sql file specified by sql title
+	 * @param	title
+	 * 			the title of the sql
 	 * 
 	 * @return	the MySQL in file
 	 * */
-	public static String getMySQL(String filepath){
-		StringBuilder sb = new StringBuilder();
+	public static String getMySQL(String title){
 		try {
 			@SuppressWarnings("resource")
-			BufferedReader reader = new BufferedReader(new FileReader(filepath));
+			BufferedReader reader = new BufferedReader(new FileReader(Config.SQL));
 			String line = null;
 			while((line = reader.readLine()) != null){
-				sb.append(line);
+				if(line.equals(title)){
+					return reader.readLine();
+				}
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -29,6 +30,6 @@ public class GetMySQL {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return sb.toString();
+		return null;
 	}	
 }

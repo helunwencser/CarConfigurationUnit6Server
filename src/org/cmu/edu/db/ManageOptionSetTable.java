@@ -3,7 +3,6 @@ package org.cmu.edu.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ManageOptionSetTable {
@@ -34,22 +33,22 @@ public class ManageOptionSetTable {
 	 * @param	optionSet
 	 * 			the name of optionSet
 	 *
-	 * @return	if record is contained in option_table, return the ResultSet;
-	 * 			otherwise, return null
+	 * @return	if record is contained in option_table, return the primary key;
+	 * 			otherwise, return -1
 	 * */
-	private ResultSet selectOptionSet(String optionSet){
-		String query = GetMySQL.getMySQL(FileName.SELECT_OPTIONSET);
-		ResultSet resultSet = null;
+	public int selectOptionSet(String optionSet){
+		String query = GetMySQL.getMySQL(SQL.SELECT_OPTIONSET);
+		int key = -1;
 		try {
 			PreparedStatement statement = this.conn.prepareStatement(query);
 			statement.setString(1, optionSet);
-			resultSet = statement.executeQuery(query);
+			key = statement.executeQuery(query).getInt(1);
 			statement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return resultSet;
+		return key;
 	}
 	
 	/*
@@ -60,24 +59,18 @@ public class ManageOptionSetTable {
 	 * @return	the primary key of the record
 	 * */
 	public int addOptionSet(String optionSet){
-		int key = -1;
-		ResultSet resultSet = this.selectOptionSet(optionSet);
-		if(resultSet != null){
+		int key = this.selectOptionSet(optionSet);
+		if(key == -1){
 			try {
-				PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.INSERT_OPTIONSET));
+				PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.INSERT_OPTIONSET));
 				statement.setString(1, optionSet);
 				statement.execute();
 				statement.close();
+				key = this.selectOptionSet(optionSet);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		try {
-			key = resultSet.getInt(1);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return key;
 	}
@@ -89,7 +82,7 @@ public class ManageOptionSetTable {
 	 * */
 	public void deleteOptionSet(String optionSet){
 		try {
-			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.DELETE_OPTIONSET));
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.DELETE_OPTIONSET));
 			statement.setString(1, optionSet);
 			statement.execute();
 			statement.close();
@@ -109,7 +102,7 @@ public class ManageOptionSetTable {
 	 * */
 	public void updateOptionSet(String oldOptionSet, String newOptionSet){
 		try {
-			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.UPDATE_OPTIONSET));
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.UPDATE_OPTIONSET));
 			statement.setString(1, newOptionSet);
 			statement.setString(2, newOptionSet);
 			statement.execute();

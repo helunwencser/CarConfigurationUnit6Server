@@ -3,7 +3,6 @@ package org.cmu.edu.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ManageAutoTable {
@@ -39,23 +38,23 @@ public class ManageAutoTable {
 	 * @param	basePrice
 	 * 			the basePrice of automobile
 	 * 
-	 * @return	if the record is contained in auto_table, return the ResultSet;
-	 * 			otherwise, return null
+	 * @return	if the record is contained in auto_table, return the primary key;
+	 * 			otherwise, return -1
 	 * */
-	private ResultSet selectAuto(String autoName, String make, int basePrice){
-		ResultSet resultSet = null;
+	private int selectAuto(String autoName, String make, int basePrice){
+		int key = -1;
 		try {
-			String query = GetMySQL.getMySQL(FileName.SELECT_AUTO);
+			String query = GetMySQL.getMySQL(SQL.SELECT_AUTO);
 			PreparedStatement statement = this.conn.prepareStatement(query);
 			statement.setString(1, autoName);
 			statement.setString(2, make);
 			statement.setInt(3, basePrice);
-			resultSet = statement.executeQuery(query);
+			key = statement.executeQuery(query).getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return resultSet;
+		return key;
 	}
 	
 	/*
@@ -72,27 +71,20 @@ public class ManageAutoTable {
 	 * @return	the primary key of inserted record
 	 * */
 	public int addAuto(String autoName, String make, int basePrice){
-		int key = -1;
-		ResultSet resultSet = this.selectAuto(autoName, make, basePrice);
-		if(resultSet == null){
+		int key = this.selectAuto(autoName, make, basePrice);
+		if(key == -1){
 			try {
-				PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.INSERT_AUTO));
+				PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.INSERT_AUTO));
 				statement.setString(1, autoName);
 				statement.setString(2, make);
 				statement.setInt(3, basePrice);
 				statement.execute();
 				statement.close();
-				resultSet = this.selectAuto(autoName, make, basePrice);
+				key = this.selectAuto(autoName, make, basePrice);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		try {
-			key = resultSet.getInt(1);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return key;
 	}
@@ -110,7 +102,7 @@ public class ManageAutoTable {
 	 * */
 	public void deleteOption(String autoName, String make, int basePrice){
 		try {
-			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.DELETE_AUTO));
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.DELETE_AUTO));
 			statement.setString(1, autoName);
 			statement.setString(2, make);
 			statement.setInt(3, basePrice);
@@ -132,7 +124,7 @@ public class ManageAutoTable {
 	 * */
 	public void updateAutoName(String oldAutoName, String newAutoName){
 		try {
-			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.UPDATE_AUTO_NAME));
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.UPDATE_AUTO_NAME));
 			statement.setString(1, newAutoName);
 			statement.setString(2, oldAutoName);
 			statement.execute();
@@ -153,7 +145,7 @@ public class ManageAutoTable {
 	 * */
 	public void updateAutoMake(String autoName, String make){
 		try{
-			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.UPDATE_AUTO_MAKE));
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.UPDATE_AUTO_MAKE));
 			statement.setString(1, make);
 			statement.setString(2, autoName);
 			statement.execute();
@@ -174,7 +166,7 @@ public class ManageAutoTable {
 	 * */
 	public void udpateAutoBasePrice(String autoName, int basePrice){
 		try {
-			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.UPDATE_AUTO_BASEPRICE));
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.UPDATE_AUTO_BASEPRICE));
 			statement.setInt(1, basePrice);
 			statement.setString(2, autoName);
 			statement.execute();

@@ -45,7 +45,7 @@ public class ManageMappingTable {
 	 * */
 	private boolean isContained(int auto_id, int optionSet_id, int option_id){
 		try {
-			String query = GetMySQL.getMySQL(FileName.SELECT_MAPPING);
+			String query = GetMySQL.getMySQL(SQL.SELECT_MAPPING);
 			PreparedStatement statement = this.conn.prepareStatement(query);
 			statement.setInt(1, auto_id);
 			statement.setInt(2, optionSet_id);
@@ -59,7 +59,6 @@ public class ManageMappingTable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return false;
 	}
 	
@@ -77,7 +76,7 @@ public class ManageMappingTable {
 	public void addMapping(int auto_id, int optionSet_id, int option_id){
 		if(!this.isContained(auto_id, optionSet_id, option_id)){
 			try {
-				PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.INSERT_MAPPING));
+				PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.INSERT_MAPPING));
 				statement.setInt(1, auto_id);
 				statement.setInt(2, optionSet_id);
 				statement.setInt(3, option_id);
@@ -97,7 +96,7 @@ public class ManageMappingTable {
 	 * */
 	public void deleteMapping(int auto_id){
 		try {
-			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(FileName.DELETE_MAPPING));
+			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.DELETE_MAPPING));
 			statement.setInt(1, auto_id);
 			statement.execute();
 			statement.close();

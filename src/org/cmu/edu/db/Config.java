@@ -6,4 +6,6 @@ public class Config {
 	public static String PASSWORD = "helunwen";
 	
 	public static String DATABASE = "automobiles";
+	
+	public static String SQL = "sql";
 }

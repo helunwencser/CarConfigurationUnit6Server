@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.cmu.edu.db.CreateDB;
+import org.cmu.edu.db.CreateTable;
 import org.cmu.edu.model.Automobile;
 import org.cmu.edu.model.AutomobileCollection;
 import org.cmu.edu.model.OptionSet;
@@ -29,6 +31,12 @@ public abstract class ProxyAutomobile {
 	
 	public ProxyAutomobile(){
 		ProxyAutomobile.automobiles = new AutomobileCollection();
+		
+		/* create database */
+		new CreateDB();
+		
+		/* create tables */
+		new CreateTable();
 	}
 	
 	/*
