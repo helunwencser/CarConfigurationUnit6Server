@@ -48,6 +48,20 @@ public class ExecuteSQL {
 		}
 	}
 	
+	/*
+	 * insert a record to auto_table
+	 * @param	sql
+	 * 			the sql to be executed
+	 * 
+	 * @param	name
+	 * 			the name of automobile
+	 * 
+	 * @param	make
+	 * 			the name of make
+	 * 
+	 * @param	baseprice
+	 * 			the baseprice of automobile
+	 * */
 	public void insertAuto(String sql, String name, String make, int baseprice){
 		try {
 			PreparedStatement statement = this.conn.prepareStatement(sql);
@@ -61,6 +75,51 @@ public class ExecuteSQL {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	/*
+	 * insert a price record to *_price_table
+	 * @param	sql
+	 * 			the sql to be executed
+	 * 
+	 * @param	option
+	 * 			the name of option
+	 * 
+	 * @param	price
+	 * 			the price of the option	
+	 * */
+	public void insertPrice(String sql, String option, int price){
+		try {
+			PreparedStatement statement = this.conn.prepareStatement(sql);
+			statement.setString(1, option);
+			statement.setInt(2, price);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	
+	/*
+	 * insert a record to auto_option_table
+	 * @param	auto_id
+	 * 			the id of automobile
+	 * 
+	 * @param	option_id
+	 * 			the id of option
+	 * */
+	public void insertAutoOptionTuple(String sql, int auto_id, int option_id){
+		try {
+			PreparedStatement statement = this.conn.prepareStatement(sql);
+			statement.setInt(1, auto_id);
+			statement.setInt(2, option_id);
+			statement.execute();
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/*
