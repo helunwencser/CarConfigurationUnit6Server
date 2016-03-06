@@ -91,7 +91,7 @@ public abstract class ProxyAutomobile {
 		ProxyAutomobile.automobiles.deleteAutomobile(autoName);
 		/* delete from auto_table */
 		int auto_id = this.autoTable.selectAuto(automobile.getName(), automobile.getMake(), automobile.getBasePrice());
-		this.autoTable.deleteOption(automobile.getName(), automobile.getMake(), automobile.getBasePrice());
+		this.autoTable.deleteAuto(automobile.getName(), automobile.getMake(), automobile.getBasePrice());
 		
 		/* delete from mapping_table */
 		this.mappingTable.deleteMapping(auto_id);

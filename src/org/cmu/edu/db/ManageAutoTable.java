@@ -105,7 +105,7 @@ public class ManageAutoTable {
 	 * @param	basePrice
 	 * 			the basePrice of automobile
 	 * */
-	public void deleteOption(String autoName, String make, int basePrice){
+	public void deleteAuto(String autoName, String make, int basePrice){
 		try {
 			PreparedStatement statement = this.conn.prepareStatement(GetMySQL.getMySQL(SQL.DELETE_AUTO));
 			statement.setString(1, autoName);
