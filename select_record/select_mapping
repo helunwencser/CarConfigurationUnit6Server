@@ -1,1 +1,0 @@
-select * from mapping_table where auto_id = ? and optionSet_id = ? and option_id = ?

@@ -1,1 +1,0 @@
-create table if not exists mapping_table (auto_id int not null, optionSet_id int not null, option_id int not null);

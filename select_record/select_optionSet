@@ -1,1 +1,0 @@
-select * from optionSet_table where optionSet = ?

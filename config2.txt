@@ -1,0 +1,4 @@
+name:model4
+make:VW_Make4
+baseprice:182315
+properties:color:Fort Knox Gold Clearcoat Metallic|0,Liquid Grey Clearcoat Metallic|0,Infra-Red Clearcoat|0,Grabber Green Clearcoat Metallic|0,Sangria Red Clearcoat Metallic|0,French Blue Clearcoat Metallic|0,Twilight Blue Clearcoat Metallic|0,CD Silver Clearcoat Metallic|0,Pitch Black Clearcoat|0,Cloud 9 White Clearcoat|0_transmission:automatic|0,manual|-815_brakes:Standard|0,ABS|400,ABS with Advance Trac|1625_airbags:none|0,true|350_powerMoonroof:none|0,true|595

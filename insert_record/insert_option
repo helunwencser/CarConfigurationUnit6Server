@@ -1,1 +1,0 @@
-insert into option_table (option, price) values (?, ?)

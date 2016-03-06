@@ -11,7 +11,7 @@ create_optionSet_table
 create table if not exists optionSet_table (id int not null auto_increment, optionSet char(128), primary key(id));
 
 create_option_table
-create table if not exists option_table (id int not null auto_increment, option char(128), price int, primary key(id));
+create table if not exists option_table (id int not null auto_increment, optionName char(128), price int, primary key(id));
 
 delete_auto
 delete from auto_table where name = ? and make = ? and baseprice = ?
@@ -20,7 +20,7 @@ delete_mapping
 delete from mapping_table where auto_id = ?
 
 delete_option
-delete from option_table where option = ? and price = ?
+delete from option_table where optionName = ? and price = ?
 
 delete_optionSet
 delete from optionSet_table where optionSet = ?
@@ -32,7 +32,7 @@ insert_mapping
 insert into mapping_table (auto_id, optionSet_id, option_id) values (?, ?, ?)
 
 insert_option
-insert into option_table (option, price) values (?, ?)
+insert into option_table (optionName, price) values (?, ?)
 
 insert_optionSet
 insert into optionSet_table (optionSet) values (?)
@@ -44,7 +44,7 @@ select_mapping
 select * from mapping_table where auto_id = ? and optionSet_id = ? and option_id = ?
 
 select_option
-select * from option_table where option = ? and price = ?
+select * from option_table where optionName = ? and price = ?
 
 select_optionSet
 select * from optionSet_table where optionSet = ?
@@ -52,7 +52,7 @@ select * from optionSet_table where optionSet = ?
 select_option_id
 select * from mapping_table where option_id = ?
 
-select_option_id
+select_optionSet_id
 select * from mapping_table where optionSet_id = ?
 
 update_auto_baseprice
@@ -65,13 +65,13 @@ update_auto_name
 update auto_table set name = ? where name = ?
 
 update_option
-update option_table set price = ? where option = ? and price = ?
+update option_table set price = ? where optionName = ? and price = ?
 
 update_optionSet
 update optionSet_table set optionSet = ? where optionSet = ?
 
 update_mapping_option_id
-update mapping_table set option_id = ? where auto_id = ?and optionSet_id = ? and option_id = ?
+update mapping_table set option_id = ? where auto_id = ? and optionSet_id = ? and option_id = ?
 
 update_mapping_optionSet_id
-upate mapping_table set optionSet_id = ? where auto_id ? and optionSet_id = ?
+update mapping_table set optionSet_id = ? where auto_id ? and optionSet_id = ?

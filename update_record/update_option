@@ -1,1 +1,0 @@
-update option_table set price = ? where option = ? and price = ?

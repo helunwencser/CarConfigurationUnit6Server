@@ -1,1 +1,0 @@
-delete from optionSet_table where optionSet = ?

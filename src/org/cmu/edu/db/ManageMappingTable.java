@@ -44,22 +44,30 @@ public class ManageMappingTable {
 	 * 			otherwise, return false
 	 * */
 	private boolean isContained(int auto_id, int optionSet_id, int option_id){
+		boolean res = false;
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
 		try {
 			String query = GetMySQL.getMySQL(SQL.SELECT_MAPPING);
-			PreparedStatement statement = this.conn.prepareStatement(query);
+			statement = this.conn.prepareStatement(query);
 			statement.setInt(1, auto_id);
 			statement.setInt(2, optionSet_id);
 			statement.setInt(3, option_id);
-			ResultSet resultSet = statement.executeQuery(query);
-			statement.close();
-			while(resultSet.next()){
-				return true;
-			}
+			resultSet = statement.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		try {
+			if(resultSet != null && resultSet.next()){
+				res = true;
+			}
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	/*
@@ -71,18 +79,28 @@ public class ManageMappingTable {
 	 * 			otherwise, return false
 	 * */
 	public boolean isOptioinContained(int option_id){
+		boolean res = false;
 		ResultSet resultSet = null;
+		PreparedStatement statement = null;
 		try {
 			String query = GetMySQL.getMySQL(SQL.SELECT_OPTION_ID);
-			PreparedStatement statement = this.conn.prepareStatement(query);
+			statement = this.conn.prepareStatement(query);
 			statement.setInt(1, option_id);
-			resultSet = statement.executeQuery(query);
+			resultSet = statement.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			if(resultSet != null && resultSet.next()){
+				res = true;
+			}
 			statement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return resultSet == null ? false : true;
+		return res;
 	}
 	
 	/*
@@ -94,18 +112,28 @@ public class ManageMappingTable {
 	 * 			otherwise, return false
 	 * */
 	public boolean isOptioinSetContained(int optionSet_id){
+		boolean res = false;
 		ResultSet resultSet = null;
+		PreparedStatement statement = null;
 		try {
 			String query = GetMySQL.getMySQL(SQL.SELECT_OPTIONSET_ID);
-			PreparedStatement statement = this.conn.prepareStatement(query);
+			statement = this.conn.prepareStatement(query);
 			statement.setInt(1, optionSet_id);
-			resultSet = statement.executeQuery(query);
+			resultSet = statement.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			if(resultSet != null && resultSet.next()){
+				res = true;
+			}
 			statement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return resultSet == null ? false : true;
+		return res;
 	}
 	
 	/*

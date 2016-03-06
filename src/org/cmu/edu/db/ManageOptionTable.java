@@ -3,6 +3,7 @@ package org.cmu.edu.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ManageOptionTable {
@@ -45,7 +46,10 @@ public class ManageOptionTable {
 			PreparedStatement statement = this.conn.prepareStatement(query);
 			statement.setString(1, option);
 			statement.setInt(2, price);
-			key = statement.executeQuery(query).getInt(1);
+			ResultSet resultSet = statement.executeQuery();
+			if(resultSet.next()){
+				key = resultSet.getInt(1);	
+			}
 			statement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

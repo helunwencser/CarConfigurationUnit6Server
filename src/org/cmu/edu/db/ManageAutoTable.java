@@ -3,6 +3,7 @@ package org.cmu.edu.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ManageAutoTable {
@@ -49,7 +50,11 @@ public class ManageAutoTable {
 			statement.setString(1, autoName);
 			statement.setString(2, make);
 			statement.setInt(3, basePrice);
-			key = statement.executeQuery(query).getInt(1);
+			ResultSet resultSet = statement.executeQuery();
+			if(resultSet.next()){
+				key = resultSet.getInt(1);	
+			}
+			statement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

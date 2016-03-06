@@ -1,1 +1,0 @@
-delete from option_table where option = ? and price = ?

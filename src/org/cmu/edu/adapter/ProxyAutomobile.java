@@ -135,9 +135,9 @@ public abstract class ProxyAutomobile {
 
 	public void updateOptionPrice(String modelName, String optionSetName,
 			String optionName, int change) {
-		ProxyAutomobile.automobiles.getAutomobile(modelName).updateOptionPrice(optionSetName, optionName, change);
 		int oldPrice = ProxyAutomobile.automobiles.getAutomobile(modelName).getOptionValue(optionSetName, optionName);
-		int newPrice = ProxyAutomobile.automobiles.getAutomobile(modelName).getOptionValue(optionSetName, optionName) + change; 
+		int newPrice = oldPrice + change;
+		ProxyAutomobile.automobiles.getAutomobile(modelName).updateOptionPrice(optionSetName, optionName, change);
 		this.optionTable.addOption(optionName, newPrice);
 		int newOption_id = this.optionTable.selectOption(optionName, newPrice);
 		Automobile automobile = ProxyAutomobile.automobiles.getAutomobile(modelName);
@@ -155,7 +155,8 @@ public abstract class ProxyAutomobile {
 		Util util = new Util(fileName);
 		if(fileType.equals("txt")){
 			Automobile automobile = util.buildAutoObject();
-			ProxyAutomobile.automobiles.addAutomobile(automobile.getName(), automobile);
+			//ProxyAutomobile.automobiles.addAutomobile(automobile.getName(), automobile);
+			this.addAutomobile(automobile);
 		}else{
 			this.buildAutoFromProperties(util.getPropertiesObject());
 		}
@@ -277,6 +278,17 @@ public abstract class ProxyAutomobile {
 			}
 		}
 		automobile.addOptionSet(optionSet5, options5);
-		ProxyAutomobile.automobiles.addAutomobile(model, automobile);
+		//ProxyAutomobile.automobiles.addAutomobile(model, automobile);
+		this.addAutomobile(automobile);
+	}
+	
+	/*
+	 * close resources
+	 * */
+	public void closeResources(){
+		this.autoTable.closeResources();
+		this.mappingTable.closeResources();
+		this.optionSetTable.closeResources();
+		this.optionTable.closeResources();
 	}
 }

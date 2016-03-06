@@ -1,1 +1,0 @@
-delete from mapping_table where auto_id = ?

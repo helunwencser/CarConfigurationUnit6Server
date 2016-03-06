@@ -1,2 +1,0 @@
-create table if not exists option_table (id int not null auto_increment, option char(128), price int, primary key(id)
-);
